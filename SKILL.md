@@ -192,7 +192,9 @@ Then, in order — every check scoped to `story/{E}-*`:
 - **A `story/{E}-*` branch without an open PR** → STOP: a previous run died partway, most
   likely on a usage limit. Report the branch, whether it has commits, and whether it is
   pushed. Recovery is the owner's call — delete the branch to redo the story, or push and
-  open the PR by hand. Never resume into it and never delete it yourself.
+  open the PR by hand (finishing it on a stronger model than the story's `Dev Model:`
+  line names means updating the line before the review — *Models*, below). Never resume
+  into it and never delete it yourself.
 
   ```bash
   git branch -a --list '*story/{E}-*'
@@ -579,6 +581,15 @@ does go stale is the set of tiers and how they stand to each other — that is w
 table is the project's, required, and not a default this skill ships. `lane-gates.py`
 checks it at every read: every role set, every dev model paired, no model paired with
 itself.
+
+The lookup keys on the story's `Dev Model:` line, so the line must say who actually
+wrote the code. Inside a run it does. **A story finished by hand does not** — a run
+that died on a usage limit, a draft PR's resume — because the owner's pass runs on
+whatever their session is, and the line still names the model the run planned. Before
+the review, set `Dev Model:` to the strongest model that touched the code; otherwise
+the lookup pairs the review against the wrong model and the split collapses without
+anyone saying so. (Observed once: a Sonnet story resumed on Opus and reviewed on Opus,
+because the line said Sonnet.)
 
 **The shipped pairing** (`implement-next-story.example.toml`, as of 2026-09) is
 `sonnet → opus`, `opus → fable`. Fable is reachable only through the escalated row, so

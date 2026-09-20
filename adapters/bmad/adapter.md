@@ -60,7 +60,10 @@ marker as written.
   `[Review][Decision]` items in the story file. Once the owner has answered them there,
   they run `bmad-dev-story` and then `bmad-code-review` on the story file, on the branch —
   dev-story picks up the unchecked review items, the second review flips the story to
-  `done` — and undraft the PR. The skill never resumes a draft itself.
+  `done` — and undraft the PR. The skill never resumes a draft itself. If that dev-story
+  pass runs on a stronger model than the story's `Dev Model:` line names, change the line
+  to that model first, so the second review is looked up against the model that actually
+  wrote the code (SKILL.md, *Models*).
 - BMad's skills glob story files **non-recursively**: a story moved into a subfolder is
   invisible to create-story, dev-story and retrospective. Keep every in-progress epic's
   story files flat in `{stories_dir}`; archive per epic once it is done, never per phase.

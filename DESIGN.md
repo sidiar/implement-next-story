@@ -166,7 +166,11 @@ and 4.12, Sonnet → Opus); 3.19's second review — after the owner's decision,
 limit, the owner's resume pass was Opus, and the review was Opus because the story's
 `Dev Model:` line still said Sonnet. For the resume's own diff — one e2e fix — the split
 collapsed, and nothing said so. The table keys on who the story *says* implemented it; a
-hand-finished story is where that can be less than the truth.
+hand-finished story is where that can be less than the truth. 2.0.1 makes it a rule: before
+the review of a hand-finished story, the owner sets `Dev Model:` to the strongest model that
+touched the code — in *Models*, in the dangling-branch guard's hand-back, and in both
+adapters' resume notes. A rule for the owner, not the orchestrator, because the orchestrator
+is never there when it matters.
 
 ## The board and the vocabulary are the skill's
 

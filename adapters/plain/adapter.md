@@ -69,7 +69,10 @@ for the owner. This adapter presents no prompts; there is nothing to answer.
   unchecked, and in a session on the branch runs the `## Implement` prompt, then the
   `## Review` prompt, placeholders filled by hand — Implement implements each answer and
   ticks its line; Review flips the story to `done` — then commits, pushes, and undrafts
-  the PR. The skill never resumes a draft itself.
+  the PR. The skill never resumes a draft itself. If that Implement pass runs on a
+  stronger model than the story's `Dev Model:` line names, change the line to that model
+  first, so the Review is looked up against the model that actually wrote the code
+  (SKILL.md, *Models*).
 - Nothing here globs `{stories_dir}`; keep story files flat anyway, the orchestrator reads
   `{stories_dir}/{story_key}.md` by name.
 - The only files a story PR touches outside the code are `{story_file}` and `{status_file}`.

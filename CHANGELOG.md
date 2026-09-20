@@ -3,17 +3,25 @@
 Dates are the dates the change landed in the source project; the skill was extracted
 with its history on 2026-09-15.
 
-## Unreleased
+## 2.0.1 — 2026-09-20
 
-Docs only. `DESIGN.md` records what the source project's runs after 2.0.0 changed: *The
+One rule, from an incident on 2026-09-18: a story finished by hand — a run dead on a usage
+limit, a draft PR's resume — must have its `Dev Model:` line set to the strongest model
+that touched the code before the review, or `lane-gates.py reviewer` pairs the review
+against the model the run *planned* and the split collapses silently. Story 4.12 in the
+source project: Sonnet dev pass died, owner resumed on Opus, review on Opus because the
+line still said Sonnet. Stated in `SKILL.md` *Models*, in the dangling-branch guard's
+hand-back, and in both adapters' *Notes* resume paths. A rule for the owner: the
+orchestrator is never present when it applies.
+
+Also: `DESIGN.md` records what the source project's runs after 2.0.0 changed: *The
 board and the vocabulary are the skill's* is now *observed* for the `bmad` adapter (story
 3.19 walked the `decision-needed` → draft → owner → second review → `done` path as 1.1.1
 wrote it; 4.12 ran the no-decision half and died on a usage limit in Step 2); *Step S* has
 conflicted twice, both times in the project's `deferred-work.md` and resolved by its rule,
 the two shipped rules still unexercised; the first gate row was proposed and not needed; a
-doubled TOML from the 2.0.0 merge stopped both lanes at Step 0 (fail-closed, as designed);
-a hand-finished story is where the review-model lookup can be less than the truth. README
-links the source project.
+doubled TOML from the 2.0.0 merge stopped both lanes at Step 0 (fail-closed, as designed).
+README links the source project.
 
 ## 2.0.0 — 2026-09-17
 
