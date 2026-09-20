@@ -21,9 +21,11 @@ worked by one session.
 
 ## What it did on a real project
 
-Thirty stories of a Next.js/TypeScript app, 2026-08-26 → 2026-09-15, measured by the
-skill itself from the runtime's own transcripts — not estimated. The numbers are in each
-story file in the source project; this is the aggregate.
+Thirty stories of [Game of Life Studio](https://github.com/sidiar/game-of-life-studio), a
+Next.js/TypeScript app, 2026-08-26 → 2026-09-15, measured by the skill itself from the
+runtime's own transcripts — not estimated. The numbers are in each story file in the source
+project; this is the aggregate. The project consumes the skill as a git subtree and has kept
+running it since — [DESIGN.md](DESIGN.md) records what the runs after 2.0.0 changed.
 
 | | Median per story | Notes |
 | --- | ---: | --- |
@@ -72,7 +74,7 @@ runs took 4 h 44 and 4 h 30 on the clock and 74 and 61 minutes of work.
 - **Gates are rows, not memory.** A cross-epic dependency exists only as a line in
   `lane-gates.yaml`, versioned on `main` and checked by a script. Rows are proposed by the
   agents that notice them, approved by the human, and ride the story's PR.
-  ([why](DESIGN.md#gates-are-rows-not-memory), [the sync step](DESIGN.md#step-s--the-sync-that-has-never-conflicted))
+  ([why](DESIGN.md#gates-are-rows-not-memory), [the sync step](DESIGN.md#step-s--the-sync-that-has-conflicted-twice))
 - **Measured, not estimated.** Every phase reports the tokens the API's `usage` blocks
   recorded for every agent that started inside it, and active time with idle gaps listed so
   the figure is auditable against the wall clock.

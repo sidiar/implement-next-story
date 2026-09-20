@@ -4,8 +4,12 @@
 in the order the README lists them. Each is labelled: **incident** (something went wrong
 and the rule is the fix), **observed** (the rule was designed up front and the runs since
 bear it out), or **anticipated** (designed up front and never yet exercised). The source
-project is a Next.js/TypeScript app; thirty stories went through the skill between
-2026-08-26 and 2026-09-15.
+project is [Game of Life Studio](https://github.com/sidiar/game-of-life-studio), a
+Next.js/TypeScript app; thirty stories went through the skill between 2026-08-26 and
+2026-09-15, and it kept running there after the extraction — the project took 2.0.0 on
+2026-09-18 (its PR #54) and two stories have gone through the `bmad` adapter under the
+contract since, 3.19 (PR #58) and 4.12 (PR #59), both that day. Where a section's label
+changed because of those two runs, the paragraph that changed it is dated.
 
 ## The PR is the state machine
 
@@ -57,6 +61,21 @@ excluded gap rather than as work. Neither produced wreckage — the HALT rule ("
 conditions belong to the BMad skills; surface the reason and stop") did its job — but
 3.7's number is why *Active* exists (below).
 
+*Observed, 2026-09-18.* The same rule holds one level down, in the config. 2.0.0 reached
+the source project as two commits — the subtree pull and the project's new `[adapter]` /
+`[models]` tables — and each had added the tables, so the merge (PR #54) declared every
+one of them twice. `tomllib` rejects a duplicate table, `lane-gates.py` reads the config
+before it reads anything else, and every run on both lanes stopped at Step 0 with the
+parser's error and the line number:
+
+> `not valid TOML: Cannot declare ('adapter',) twice (at line 19, column 9)` —
+> `lane-gates.py analysed` / `check` read the config, so every `implement-next-story` run
+> stops at Step 0 — on both lanes.
+
+The fix was one PR (#57, delete the second block) an hour later. *No config is an error,
+not a guess* was written for a missing table; a doubled one is the same case, and a lenient
+reader that took the first block would have run on it and never said so.
+
 ## One lane per working tree
 
 *Incident.* On 2026-09-13 the skill became lane-aware, and two lanes were launched
@@ -96,6 +115,17 @@ written into the tree. The fix has two parts, both in `lane-gates.py`:
 
 The pre-Step-2 re-check stays. The lock is a file; the tree is the evidence.
 
+*The dead-holder case, observed 2026-09-18.* Story 4.12's run hit a usage limit in Step 2
+— the dev subagent stopped with one e2e red and its record unwritten, and the orchestrator
+session went with it — the first run killed mid-phase since the lock existed. The owner
+finished the story by hand in the same tree (a second dev pass on Opus, then the review on
+Opus per the table, then the PR), and the dead session's lock sat there throughout. Nothing
+was harmed: the lock guards *runs*, and no run tried the tree. The PR's hand-back notes the
+lock as the one piece of wreckage — `lock release --force` before the next run — which is
+the designed recovery; the hour-of-silence takeover would have done the same at the next
+Step 0 without anyone typing it. What the run did not leave behind is a stats table: Step 4
+never ran, so 4.12 is the one story since 2026-08-26 whose cost is not on record.
+
 ## Never the same model twice
 
 *Incident, then a second one.* Two commits, two weeks apart.
@@ -130,10 +160,19 @@ One impression rode along, from those ten runs rather than from a comparison: Fa
 to do worse under step-by-step prescription than Opus or Sonnet, so its review prompt is
 deliberately shorter — the goal, the branch, the two hard rules, and the method left to it.
 
+*Observed, 2026-09-18.* The lookup has run twice in anger, both on the Sonnet row (3.19
+and 4.12, Sonnet → Opus); 3.19's second review — after the owner's decision, on the branch
+— was also on Opus. 4.12 shows the rule's blind spot: the Sonnet dev pass died on a usage
+limit, the owner's resume pass was Opus, and the review was Opus because the story's
+`Dev Model:` line still said Sonnet. For the resume's own diff — one e2e fix — the split
+collapsed, and nothing said so. The table keys on who the story *says* implemented it; a
+hand-finished story is where that can be less than the truth.
+
 ## The board and the vocabulary are the skill's
 
-*Anticipated.* Nothing has run on an adapter other than `bmad`; this section records a
-decision, not a result.
+*Anticipated when written; observed since 2026-09-18 — for `bmad`.* This section was
+written before anything had run under the contract; the two runs that have (below) each
+exercised a different half of it.
 
 v2 made the three phase prompts pluggable and deliberately left two things fixed. The
 **board format** — `sprint-status.yaml`, one `key: status` line per story under one
@@ -157,6 +196,28 @@ question for its first run — which happened the same day, on a throwaway todo 
 no hand between phases, one patch, one deferral, no decision. One run on a thirty-line
 story does not make the section *observed*; it does mean the seam is no longer imagined.
 
+*Observed, 2026-09-18.* The `bmad` adapter ran twice under the contract on the source
+project, the day after 2.0.0 landed there. Story 3.19 (PR #58) walked the whole vocabulary:
+the review raised one `decision-needed` finding — whether `Escape` in the fullscreen stage
+should stop the run or exit the stage — wrote it as the `- [ ] [Review][Decision]` line the
+done-check counts, left the story short of `done`, and the orchestrator opened the PR as a
+draft, an hour and a quarter after Step 0 (Sonnet dev, Opus review, four agents in
+Step 3, 340 k output tokens, no idle gap). What 1.1.1 wrote down as the path from draft to
+`done` then happened as written, by the owner, on the branch: the answer recorded in the
+story file nine minutes after the hand-back, a dev pass for it, a second review on Opus
+(twelve more patches, four more deferrals, no new decision), the box ticked, status `done`,
+the PR undrafted an hour after it opened, merged that evening. Story 4.12 (PR #59)
+exercised the other half — no decision, eleven patches, one deferral, `done` at the
+review's hand — and the failure case besides: the run died on a usage limit in Step 2
+(*One lane per working tree*, above), and finishing it by hand meant reading the board,
+the trailers and the buckets exactly as the contract states them, which is the test of a
+vocabulary that it survives the tooling that usually writes it.
+
+So the section is *observed* for `bmad`, on two stories. The seam between the orchestrator
+and the adapter has one adapter's evidence at production scale and one adapter's evidence
+on a toy; the claim that the board and the buckets are the *skill's* rather than BMad's is
+still, in practice, a claim about BMad's runs.
+
 ## Gates are rows, not memory
 
 *Anticipated.* When the second epic opened, the two epics' dependencies were analysed once, by hand, and
@@ -171,11 +232,20 @@ have been read on every Step 0 since and have never said *gated* to a live run. 
 first analysis was committed directly to `main`, before the skill required a PR for it;
 *Opening a lane* is the same event with the PR the rules now demand.
 
-## Step S — the sync that has never conflicted
+The proposal half of the rule fired once, on 2026-09-17: story 3.18's create-story noticed
+that it was lifting four components out of files the preview panel (4.15) would consume
+next, proposed `4-15 requires 3-18` with the reason, and the review confirmed it from the
+diff; the PR (#55) carried the row as text, *not written — owner's call*. The owner did not
+add it, and did not need to: epic 3 closed on `main` the next day, so the row could never
+have said *gated*. The shape held — agents propose, the human decides, the file only changes
+through a PR — and the file is unchanged since 2026-09-13.
 
-*Anticipated.* Five story PRs have been synced with `main` after the other lane merged first (#26, #33,
-#35, #36, #37). All five were clean merges; the conflict rules have never been exercised.
-The step exists anyway, because the repo has no branch protection and the failure it guards
+## Step S — the sync that has conflicted twice
+
+*Anticipated, then observed for one of the three rules.* Five story PRs had been synced with
+`main` after the other lane merged first (#26, #33, #35, #36, #37) by the time of the
+extraction. All five were clean merges; the conflict rules had never been exercised.
+The step existed anyway, because the repo has no branch protection and the failure it guards
 against is structural: two PRs can each be green against the `main` they were cut from and
 merge to a red `main`. The two mechanisms named in the skill — a gate that measures the
 whole tree, and an identifier both branches minted sequentially — are the ones the source
@@ -183,6 +253,21 @@ project's CI actually has (a per-route bundle budget; a numbered register of spe
 resolutions). They were identified by reading the gates, not by being burned. Two rules
 ship with the skill; the project-specific ones live in `implement-next-story.toml` so the
 skill stays honest about which resolutions are universal.
+
+*Observed, 2026-09-18 and 19.* Three more syncs in the two days after 2.0.0 landed, and two
+of them conflicted, both in the same file: `deferred-work.md`, the project's running list
+of what each story chose not to do, which every story appends to and which git therefore
+cannot merge when two lanes append at once. Story 3.18's branch synced after 4.11 merged
+(#55 after #56) and 4.12's after 3.19 (#59 after #58), and both resolved it by the project's
+own rule — *main's hunks first, ours after, nothing dropped* — the first with the diff
+verified in both directions and `spec:check` and `prettier --check` green on the merge
+commit, as Step S asks. The two rules that ship with the skill still have not fired:
+`sprint-status.yaml` auto-merged cleanly both times, so the keep-both rule was never needed,
+and no conflict touched a file the rules do not name, so the abort case is untested. The
+sequential-identifier rule (`architecture.md`'s M numbers) has not been reached either. The
+step is *observed* for exactly the thing the project put in its TOML, and *anticipated* for
+what the skill ships — which is the right way round: the rule that fired is the one the
+owner wrote for the file they knew would conflict.
 
 ## Active time, not wall clock
 
