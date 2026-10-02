@@ -3,6 +3,13 @@
 Dates are the dates the change landed in the source project; the skill was extracted
 with its history on 2026-09-15.
 
+## Unreleased
+
+Docs: a demo GIF at the top of the README — story 2.3 of `implement-next-story-on-plain`,
+recorded 2026-10-02 with asciinema and rendered with agg, sped up. The run ended at a
+draft PR with one `[Review][Decision]`, the path the first `plain` run (story 2.2) did not
+take.
+
 ## 2.0.1 — 2026-09-20
 
 One rule, from an incident on 2026-09-18: a story finished by hand — a run dead on a usage
