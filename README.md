@@ -9,14 +9,12 @@ parallel lanes with dependency gates between them, and every run is timed and
 token-counted per phase.
 
 ![A run of the skill on the plain adapter: Step 0 picks story 2.3, Opus writes it, Sonnet
-implements it, Opus reviews it and opens a draft PR with one decision for the owner, then
-the per-phase stats](docs/demo.gif)
+implements it, Opus reviews it and opens a PR, then the per-phase stats](docs/demo.gif)
 
-*Story 2.3 of [`implement-next-story-on-plain`](https://github.com/sidiar/implement-next-story-on-plain),
-2026-10-02, one call — `implement the next story --epic 2` — sped up, 3 m 33 s active. The
-Create step had added a rule the epic didn't state (what `done abc` should do); the review
-flagged it as the owner's call, so the run stopped at a draft PR and handed it back, as
-designed.*
+*One call — `implement the next story --epic 2` — on
+[`implement-next-story-on-plain`](https://github.com/sidiar/implement-next-story-on-plain),
+2026-10-02, sped up: the story written on Opus, implemented on Sonnet, reviewed on Opus, a
+PR opened for the owner, 3 m 33 s active.*
 
 What the three phases *do* is the project's **adapter**. Two ship: `bmad`, for
 [BMad Method](https://github.com/bmad-code-org/BMAD-METHOD) v6, which the skill was
