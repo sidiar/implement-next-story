@@ -3,6 +3,15 @@
 Dates are the dates the change landed in the source project; the skill was extracted
 with its history on 2026-09-15.
 
+## 2.0.3 — 2026-10-04
+
+Packaging and docs only; the skill is unchanged. From the directory's first validation:
+the plugin gets its listing icon (`.claude-plugin/icon.png`, 1024 px); the demo GIF moves
+to `implement-next-story-on-plain`, the repo it records, and the README links it there —
+inside the plugin it was 3 MB every install carried and an image the directory holds for
+a reviewer on each version; and the README gains *What it reads, writes and sends*, for
+the transcripts under `~/.claude/projects/` the scripts read.
+
 ## 2.0.2 — 2026-10-04
 
 Packaging and docs only; the skill is unchanged. `plugin.json` gains the fields
