@@ -9,7 +9,7 @@ parallel lanes with dependency gates between them, and every run is timed and
 token-counted per phase.
 
 ![A run of the skill on the plain adapter: Step 0 picks story 2.3, Opus writes it, Sonnet
-implements it, Opus reviews it and opens a PR, then the per-phase stats](docs/demo.gif)
+implements it, Opus reviews it and opens a PR, then the per-phase stats](https://raw.githubusercontent.com/sidiar/implement-next-story-on-plain/main/docs/media/demo.gif)
 
 *One call — `implement the next story --epic 2` — on
 [`implement-next-story-on-plain`](https://github.com/sidiar/implement-next-story-on-plain),
@@ -222,6 +222,21 @@ The `bmad` adapter, in addition:
 - **BMad Method v6** (written against 6.8.0) — the three skills and the
   `sprint-status.yaml` file it writes natively. The review's `dismiss` bucket is dropped;
   its other three are the skill's vocabulary as written.
+
+## What it reads, writes and sends
+
+- **Reads** the project's own files (the config, the board, the plan, the story files)
+  and its git metadata through local `git` commands; and the current session's
+  transcripts under `~/.claude/projects/`, found by `CLAUDE_CODE_SESSION_ID`.
+  `story-run-stats.py` sums the token usage recorded in them; `lane-gates.py` reads only
+  their modification times, to tell whether a lock's holder is still active.
+- **Writes** story files, the board and commits on the story branch, in the repo; the
+  per-tree lock file in that tree's git dir; and the run's timing marks in
+  `$TMPDIR/implement-next-story-<session>.json`.
+- **Sends** nothing of its own. Both scripts are standard-library Python with no network
+  code. Claude, following `SKILL.md`, runs `git push` and `gh` (PRs, CI checks) against
+  the project's own GitHub remote with the git and `gh` login already on the machine.
+  No telemetry, no other service.
 
 ## Not in v2
 
