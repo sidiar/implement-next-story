@@ -3,8 +3,11 @@
 Dates are the dates the change landed in the source project; the skill was extracted
 with its history on 2026-09-15.
 
-## Unreleased
+## 2.0.2 — 2026-10-04
 
+Packaging and docs only; the skill is unchanged. `plugin.json` gains the fields
+Anthropic's plugin directory reads for a listing — `displayName`, `homepage`,
+`documentationUrl`, `supportUrl`, and `author.url` — ahead of the directory submission.
 Docs: a demo GIF at the top of the README — story 2.3 of `implement-next-story-on-plain`,
 recorded 2026-10-02 with asciinema and rendered with agg, sped up.
 
