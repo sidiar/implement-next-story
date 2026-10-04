@@ -3,6 +3,12 @@
 Dates are the dates the change landed in the source project; the skill was extracted
 with its history on 2026-09-15.
 
+## Unreleased
+
+Docs: `DESIGN.md` records the `plain` adapter's first draft → owner → `done` run (story
+2.3 of `implement-next-story-on-plain`, PR #2): the decision line, the hand-filled resume,
+and the patch the second review found.
+
 ## 2.0.3 — 2026-10-04
 
 Packaging and docs only; the skill is unchanged. From the directory's first validation:

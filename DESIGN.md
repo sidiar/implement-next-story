@@ -222,6 +222,25 @@ and the adapter has one adapter's evidence at production scale and one adapter's
 on a toy; the claim that the board and the buckets are the *skill's* rather than BMad's is
 still, in practice, a claim about BMad's runs.
 
+*Observed, 2026-10-04 — for `plain`, the decision half.* The `plain` adapter's second run,
+story 2.3 of `implement-next-story-on-plain` (its PR #2, the run the README's demo GIF
+records), took the path its first run did not. Create had pinned three rules the epic did
+not state, each "so the dev does not have to choose"; the review judged two of them settled
+and wrote the third — whether a non-integer id is an unknown id (exit 1) or a malformed
+command (exit 2), which story 2.4 inherits — as a `- [ ] [Review][Decision]` line. The
+done-check counted it, the story stayed `in-progress`, and the PR opened as a draft
+(3 m 33 s active). The owner answered two days later — keep it, exit 1 — and the resume
+ran as the adapter's *Notes* write it, its two prompts with the placeholders filled by
+hand: Implement on Sonnet, the story's `Dev Model:`, ticked the line and changed no code;
+Review on Opus, from `lane-gates.py reviewer sonnet`, found one more patch the first review
+had missed — the `try` around `done(int(argv[1]))` also caught the `JSONDecodeError` that
+`load()` raises (a `ValueError`), so a corrupt file read as `no item #1` — narrowed it to
+the parse the story's own task specified, and set `done`. Undrafted and merged the same day.
+Two things carry over from 3.19 at toy scale: the buckets and the draft rule held with an
+adapter that has no tooling of its own, and the second review is not a formality. One is
+new: a Create step that pins an open question moves the choice rather than removing it,
+and the review is where it comes back to the owner.
+
 ## Gates are rows, not memory
 
 *Anticipated.* When the second epic opened, the two epics' dependencies were analysed once, by hand, and
